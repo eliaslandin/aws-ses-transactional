@@ -282,4 +282,5 @@ vite.config.ts.timestamp-*
 .vite/
 
 # Test files
-emails-test.csv
+recipient-addresses-test.csv
+email-test.html
