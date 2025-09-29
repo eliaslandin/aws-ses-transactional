@@ -11,7 +11,8 @@ try {
     path.join(process.cwd(), PATH_TO_RECIPIENT_ADDRESSES),
     "utf8",
   );
-  recipients = csv.split("\n").filter((email) => email !== "");
+  recipients = csv.split("\n").filter((email) => email.includes("@"));
+  console.log(recipients);
 
   emailHtml = readFileSync(PATH_TO_EMAIL_HTML, "utf8");
 } catch (e) {
