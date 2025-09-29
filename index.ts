@@ -1,8 +1,4 @@
-import {
-  SendEmailCommand,
-  SendEmailCommandInput,
-  SESv2Client,
-} from "@aws-sdk/client-sesv2";
+import { SendEmailCommand, SESv2Client } from "@aws-sdk/client-sesv2";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "path";
 
@@ -34,26 +30,26 @@ const failed: string[] = [];
 const ses = new SESv2Client();
 for (const recipient of recipients) {
   try {
-    const params: SendEmailCommandInput = {
-      FromEmailAddress: FROM_EMAIL_ADDRESS,
-      Destination: {
-        ToAddresses: [recipient],
-      },
-      Content: {
-        Simple: {
-          Subject: {
-            Data: EMAIL_SUBJECT,
-          },
-          Body: {
-            Html: {
-              Data: emailHtml,
+    await ses.send(
+      new SendEmailCommand({
+        FromEmailAddress: FROM_EMAIL_ADDRESS,
+        Destination: {
+          ToAddresses: [recipient],
+        },
+        Content: {
+          Simple: {
+            Subject: {
+              Data: EMAIL_SUBJECT,
+            },
+            Body: {
+              Html: {
+                Data: emailHtml,
+              },
             },
           },
         },
-      },
-    };
-
-    await ses.send(new SendEmailCommand(params));
+      }),
+    );
 
     console.log(`Successfully sent email to ${recipient}`);
   } catch (e) {
