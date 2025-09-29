@@ -8,9 +8,10 @@
   "main": "index.ts",
   "scripts": {
     "start": "node --env-file=.env index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test"
   },
   "dependencies": {
-    "@aws-sdk/client-sesv2": "^3.896.0"
+    "@aws-sdk/client-sesv2": "^3.896.0",
+    "@types/node": "^24.5.2"
   }
 }
