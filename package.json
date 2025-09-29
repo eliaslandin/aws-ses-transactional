@@ -7,6 +7,7 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
+    "start": "node --env-file=.env index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
