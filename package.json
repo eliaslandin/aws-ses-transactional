@@ -1,0 +1,12 @@
+{
+  "name": "aws-ses-transactional",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "eliaslandin",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
