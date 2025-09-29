@@ -284,3 +284,6 @@ vite.config.ts.timestamp-*
 # Test files
 recipient-addresses-test.csv
 email-test.html
+
+# Failed email addresses
+failed.csv
