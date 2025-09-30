@@ -33,11 +33,17 @@ const rl = readline.createInterface({
 });
 
 const answer = await rl.question(
-  "Send email in " +
+  "Send email: " +
     styleText(["blue"], PATH_TO_EMAIL_HTML) +
-    " to recipients in " +
+    "\nTo recipients: " +
     styleText(["blue"], PATH_TO_RECIPIENT_ADDRESSES) +
-    "? (y/n) ",
+    "\nFrom address: " +
+    styleText(["blue"], FROM_EMAIL_ADDRESS) +
+    "\nSubject line: " +
+    styleText(["blue"], EMAIL_SUBJECT) +
+    "\nAWS profile: " +
+    styleText(["blue"], process.env.AWS_PROFILE!) +
+    "\n\nContinue? (y/n) ",
 );
 
 if (answer.trim().toLowerCase() !== "y") {
