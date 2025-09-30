@@ -1,6 +1,8 @@
 import { SendEmailCommand, SESv2Client } from "@aws-sdk/client-sesv2";
 import { readFileSync, writeFileSync } from "node:fs";
+import { styleText } from "node:util";
 import path from "path";
+import readline from "node:readline/promises";
 
 const PATH_TO_RECIPIENT_ADDRESSES = process.env.PATH_TO_RECIPIENT_ADDRESSES!;
 const PATH_TO_EMAIL_HTML = process.env.PATH_TO_EMAIL_HTML!;
@@ -24,6 +26,26 @@ try {
 if (!emailHtml || emailHtml.length === 0) {
   throw new Error("Email HTML couldn't be read from file.");
 }
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+const answer = await rl.question(
+  "Send email in " +
+    styleText(["blue"], PATH_TO_EMAIL_HTML) +
+    " to recipients in " +
+    styleText(["blue"], PATH_TO_RECIPIENT_ADDRESSES) +
+    "? (y/n) ",
+);
+
+if (answer.trim().toLowerCase() !== "y") {
+  console.log("Program stopped");
+  process.exit(0);
+}
+
+rl.close();
 
 const failed: string[] = [];
 const ses = new SESv2Client();
@@ -58,13 +80,13 @@ for (const recipient of recipients) {
 
 if (failed.length > 0) {
   console.log(
-    `Tried to send to ${recipients.length} recipients. ${failed.length} failed and ${recipients.length - failed.length} succeeded.`,
+    `\nTried to send to ${recipients.length} recipients. ${failed.length} failed and ${recipients.length - failed.length} succeeded.`,
   );
-  console.log("Failed to send to the following addresses:");
-  failed.forEach((email) => console.log(email));
+  console.log(styleText(["red"], "Failed to send to the following addresses:"));
+  failed.forEach((email) => console.log(styleText(["red"], email)));
 
   writeFileSync("failed.csv", failed.toString());
-  console.log("Wrote failed email addresses to failed.csv");
+  console.log("\nWrote failed email addresses to failed.csv");
 } else {
   console.log(`Successfully sent email to ${recipients.length} recipients!`);
 }
