@@ -8,6 +8,6 @@ Create a .env file with the following variables. (See [.env.example](./.env.exam
 
 - AWS profile to use.
 - Path to email HTML file.
-- Path to recipient emails CSV file.
-- Senders email address.
+- Path to CSV file with recipients' email addresses. (One column, seperated by new line)
+- Sender's email address.
 - Email subject line.
