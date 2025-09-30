@@ -15,7 +15,6 @@ try {
     "utf8",
   );
   recipients = csv.split("\n").filter((email) => email.includes("@"));
-  console.log(recipients);
 
   emailHtml = readFileSync(PATH_TO_EMAIL_HTML, "utf8");
 } catch (e) {
