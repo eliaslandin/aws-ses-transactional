@@ -281,6 +281,8 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 
+.DS_Store
+
 # Test files
 recipient-addresses-test.csv
 email-test.html
