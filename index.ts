@@ -17,6 +17,7 @@ try {
     "utf8",
   );
   recipients = csv.split("\n").filter((email) => email.includes("@"));
+  recipients = [...new Set(recipients)];
 
   emailHtml = readFileSync(PATH_TO_EMAIL_HTML, "utf8");
 } catch (e) {
